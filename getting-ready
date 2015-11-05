@@ -1,0 +1,26 @@
+#!/bin/bash -eu
+
+trap 'echo FAIL' ERR
+
+printf "64-bit kernel? "
+[[ $(uname -i) = x86_64 ]]
+echo SUCCESS
+
+printf "kernel version >= 3.8? "
+kernel_version=$(uname -r)
+new_enough=$( { echo 3.8; echo $kernel_version; } | sort -V | tail -1 )
+[[ $kernel_version == $new_enough ]]
+echo SUCCESS
+
+printf "device-mapper installed? "
+grep -q device-mapper /proc/devices
+echo SUCCESS
+
+printf "namespaces enabled in kernel? "
+grep -q '^CONFIG_NAMESPACES=y$' /boot/config-$(uname -r)
+echo SUCCESS
+
+printf "cgroups enabled in in kernel? "
+grep -q '^CONFIG_CGROUPS=y$' /boot/config-$(uname -r)
+echo SUCCESS
+
