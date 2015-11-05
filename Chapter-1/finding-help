@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+
+echo "The man pages are helpful"
+echo
+
+sleep 2
+set -x
+man docker
+man docker ps
+man docker-ps
