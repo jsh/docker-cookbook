@@ -1,0 +1,19 @@
+#!/bin/bash -eu
+
+# Right for Ubuntu 14.04
+# Fedora's just copied from the book.
+# Someone should verify or fix.
+
+if [[ $(lsb_release -is) == Ubuntu ]]; then
+  sudo apt-get -y -qq update
+  sudo apt-get -y -qq upgrade docker.io
+  sudo apt-get -y -qq install docker.io
+else
+  sudo yum -y install docker
+  sudo yum -y update docker
+  sudo systemctl start docker
+  sudo systemctl enable docker
+fi
+
+# get docker info
+docker info
