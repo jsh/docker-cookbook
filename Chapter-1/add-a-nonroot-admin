@@ -1,0 +1,5 @@
+#!/bin/bash -eu
+
+sudo groupadd docker
+sudo useradd dockertest
+sudo gpasswd -a dockertest docker
