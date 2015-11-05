@@ -1,0 +1,22 @@
+#!/bin/bash -eux
+
+: first docker pull is slow
+time docker pull fedora
+
+: and here it is
+docker images | grep fedora
+
+
+: second one is fast, though
+time docker pull fedora
+
+sleep 10
+
+: now we bring up a container
+docker run -id --name fedora docker.io/fedora bash
+docker ps -l
+
+sleep 10
+: cleanliness is next to godliness
+docker stop fedora
+docker rm fedora
