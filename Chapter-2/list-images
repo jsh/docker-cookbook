@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo; echo == docker images command
+docker help images
+
+echo; echo == list local images
+docker images
+
+echo; echo == images can have more than one name
+docker images | uniq --skip-fields=3 -c

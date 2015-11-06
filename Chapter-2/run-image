@@ -1,0 +1,18 @@
+#!/bin/bash -eu
+
+echo; echo == docker run command
+docker help run
+
+echo; echo == run an image as a container
+if docker ps -a | grep -q f21; then
+	docker stop f21
+	docker rm f21
+fi
+docker run -it --name=f21 fedora /bin/bash
+
+echo; echo == restart and ping the container
+docker start f21
+container=$(docker ps -lq --no-trunc)
+cmd="head -n1 /var/lib/docker/containers/$container/hosts"
+ip=$(sudo bash -c "head -n1 /var/lib/docker/containers/$container/hosts | cut -f1")
+ping $ip

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo == docker pull command
+docker help pull
+
+echo; echo == pull fedora, again
+docker pull fedora
+
+echo; echo == pull a specific centos
+docker pull centos:centos7
+
+echo; echo == pull all the centos images
+docker pull --all-tags centos
+
+echo; echo == pull a specific image by sha256 digest
+docker pull fedora | sed -n 's/Digest: /docker pull fedora@/p' | bash
