@@ -1,12 +1,10 @@
 #!/bin/bash -eu
 
-echo; echo == docker create command
-docker help create
+echo; echo == run a non-interactive command
+docker run fedora bash -c 'for i in {1..10}; do echo $i; sleep 1; done'
 
-echo; echo == start a previously-created container
-
-ID=$(docker create -it fedora bash)
-docker start -i -a $ID
+echo; echo == 'run the same command as a daemon: no terminal output!'
+docker run -d fedora bash -c 'for i in {1..10}; do echo $i; sleep 1; done'
 
 echo; echo == docker attach command
 docker help attach
@@ -15,10 +13,24 @@ echo; echo == run the container as a daemon, then attach
 container=$(docker run -d -it fedora bash)
 docker attach $container
 
-echo; echo == run a non-interactive command in the daemon
-container=$(docker run -d -it fedora bash -c 'while true ; do date; sleep 1; done')
-docker ps -l
-docker stop $container
+echo; echo == docker create command
+docker help create
 
-echo; echo = remove a container after it exits
+echo; echo == first create a container from an image
+
+ID=$(docker create -it fedora bash)
+
+echo; echo == then start it
+docker start -i -a $ID
+
+echo; echo == list all containers
+docker ps -a
+
+echo; echo == remove all containers
+docker rm $(docker ps -aq)
+docker ps -a
+
+echo; echo == remove a container after it runs and exits
 docker run --rm fedora date
+docker ps -a
+
