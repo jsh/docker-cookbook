@@ -1,7 +1,6 @@
 #!/bin/bash -eu
 
-echo "'docker help [subcommand]' also works"
-echo
+echo; echo == "'docker help [subcommand]' also works"
 
 sleep 2
 set -x
@@ -9,5 +8,4 @@ docker help
 docker help ps
 
 set +x
-echo
-echo "The 'docker help' command is often shorter than the man page."
+echo; echo "== The 'docker help' command is often shorter than the man page."

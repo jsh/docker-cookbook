@@ -2,6 +2,7 @@
 
 trap 'echo FAIL' ERR
 
+echo; echo == validate the host
 printf "64-bit kernel? "
 [[ $(uname -i) = x86_64 ]]
 echo SUCCESS

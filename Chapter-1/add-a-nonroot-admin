@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 
+echo; echo == the docker group is special
 sudo groupadd docker
 sudo useradd dockertest
 sudo gpasswd -a dockertest docker

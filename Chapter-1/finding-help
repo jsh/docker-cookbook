@@ -1,7 +1,6 @@
 #!/bin/bash -eu
 
-echo "The man pages are helpful"
-echo
+echo; echo "== The man pages are helpful"
 
 sleep 2
 set -x
